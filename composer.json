@@ -1,0 +1,15 @@
+{
+    "name": "jp.behrens/bitka",
+    "autoload": {
+        "psr-4": {
+            "Bitka\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bitka-de",
+            "email": "behrens.ka@icloud.com"
+        }
+    ],
+    "require": {}
+}
