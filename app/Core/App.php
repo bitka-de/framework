@@ -16,4 +16,38 @@
 
 namespace Bitka\Core;
 
-class App {}
+use Bitka\Core\EnvLoader;
+
+class App
+{
+    private Request $request;
+    private Router $router;
+
+    public function __construct()
+    {
+        $this->request = new Request();
+        $this->router = new Router();
+    }
+
+    public function run(): void
+    {
+        $router = $this->router;
+
+        (new EnvLoader(dirname(__DIR__, 2), '.env'))->load();
+        $this->loadFile('bootstrap/helpers');
+        $this->loadFile('routes/web', $router);
+        $router->dispatch($this->request->method(), $this->request->path());
+    }
+
+
+    private function loadFile($path, $router = null )
+    {
+        
+        $file = dirname(__DIR__, 1) . "/{$path}.php";
+        if (file_exists($file)) {
+            require_once $file;
+        } else {
+            throw new \Exception("File '{$file}' not found.");
+        }
+    }
+}

@@ -14,7 +14,7 @@
  * @version 1.0.0
  */
 
-namespace Bitka\Controller;
+namespace Bitka\Controllers;
 
 use Bitka\Core\Controller;
 
@@ -22,6 +22,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        echo "Hello @ Bitka - Framework!";
+        $this->render('home', [
+            'title' => 'Welcome to Bitka Framework',
+            'message' => 'Hello @ Bitka - Framework!'
+        ]);
     }
 }

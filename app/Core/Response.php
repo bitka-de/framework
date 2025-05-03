@@ -3,9 +3,8 @@
 /**
  * Class Response
  *
- * Diese Klasse stellt die HTTP-Antwort dar, die an den Client gesendet wird.
- * Sie ermöglicht das Setzen des Statuscodes, das Hinzufügen von Headern und das Senden von Daten (z. B. HTML, JSON).
- * Die `Response`-Klasse bietet eine zentrale Möglichkeit, um die Antwort einer HTTP-Anfrage zu formatieren und zu senden.
+ * Represents the HTTP response sent to the client. It allows setting the status code, adding headers, and sending data (e.g., HTML, JSON).
+ * The `Response` class provides a centralized way to format and send the response of an HTTP request.
  *
  * @package Bitka
  * @author  Jan P. Behrens
@@ -15,4 +14,22 @@
 
 namespace Bitka\Core;
 
-class Response {}
+class Response
+{
+
+    public function setStatusCode(int $code): void
+    {
+        http_response_code($code);
+    }
+
+    public function setHeader(string $name, string $value): void
+    {
+        header("$name: $value");
+    }
+
+    public function setContent(string $content): self
+    {
+        echo $content;
+        return $this;
+    }
+}
